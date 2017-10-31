@@ -4,11 +4,6 @@
 
 ```Python
 
-
-'''
-python main.py -H 192.168.0.106 -p 135,139,443,445,902,912,5357
-'''
-
 import optparse
 
 from socket import *
@@ -83,7 +78,7 @@ if __name__ == '__main__':
 
 
 ```
-
+`运行结果`
 E:\CodeProject\PycharmProjects\port_scan>python main.py -H 192.168.0.106 -p 0
 
 [+] Scan Results for : ********  #马赛克
