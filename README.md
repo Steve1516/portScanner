@@ -1,7 +1,7 @@
 # port_scan
 
 ---------------------------------------
-
+## port_scan based on socket
 ```Python
 
 import optparse
@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
 
 ```
-`运行结果`
+<运行结果>
 E:\CodeProject\PycharmProjects\port_scan>python main.py -H 192.168.0.106 -p 0
 
 [+] Scan Results for : ********  #马赛克
@@ -88,6 +88,56 @@ E:\CodeProject\PycharmProjects\port_scan>python main.py -H 192.168.0.106 -p 0
 [+] 445/tcp open
 [+] 902/tcp open
 [+] 912/tcp open
+Scan Finish!
+
+```
+
+
+---------------------------------------
+## port_scan based on Python-Nmap
+
+```Python
+
+import nmap
+import optparse
+
+def nmapScan(tgtHost, tgtPort):
+    nm = nmap.PortScanner()
+    nm.scan(tgtHost, tgtPort)
+    print('[*] Port : %s\tstate : %s' % (tgtPort, nm[tgtHost]['tcp'][int(tgtPort)]['state']))
+
+def main():
+    parser = optparse.OptionParser('Usage %prog -H <target HOST> -p <target PORT>')
+    parser.add_option('-H', dest='tgtHost', type='string', help='specify target host')
+    parser.add_option('-p', dest='tgtPort', type='string',
+                      help='specify target port[s] separated by \',\'(and 0 for 1-65535) ')
+
+    (options, args) = parser.parse_args()
+    tgtHost = options.tgtHost
+    tgtPorts = str(options.tgtPort).split(',')
+
+    if (tgtHost == None) | (tgtPorts[0] == None):
+        print('[-] You must specify a target host and port[s]!' + ' [*]Help: ' + parser.usage)
+        exit(0)
+
+    for tgtPort in tgtPorts:
+        nmapScan(tgtHost, tgtPort)
+
+    print('Scan Finish!')
+
+if __name__ == '__main__':
+    main()
+
+```
+
+```
+<运行结果>
+E:\CodeProject\PycharmProjects\port_scanNmap>python main.py -H 192.168.0.106 -p 21,22,139,140,339
+[*] Port : 21   state : closed
+[*] Port : 22   state : closed
+[*] Port : 139  state : open
+[*] Port : 140  state : closed
+[*] Port : 339  state : closed
 Scan Finish!
 
 ```
