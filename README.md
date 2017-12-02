@@ -16,15 +16,10 @@ def connScan(tgtHost, tgtPort):
     try:
         connSkt = socket(AF_INET, SOCK_STREAM)
         connSkt.connect((tgtHost, tgtPort))
-        #connSkt.send('Info Connect\n') #由于系统防护策略，发送此类消息会被提示端口关闭
-        #results = connSkt.recv(1024)
         screenLock.acquire()
         print('[+] %d/tcp open'%tgtPort)
-        #print('[+] ' + str(results))
     except:
         pass
-        #screenLock.acquire()
-        #print('[-] %d/tcp closed'%tgtPort)
     finally:
         screenLock.release()
         connSkt.close()
