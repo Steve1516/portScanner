@@ -1,7 +1,7 @@
-# port_scan
+# Port_scanner
 
 ---------------------------------------
-## port_scan based on socket
+## Port_scanner based on socket
 
 
 ```
@@ -20,7 +20,7 @@ Scan Finish!
 ```
 
 ---------------------------------------
-## port_scan based on Python-Nmap
+## Port_scanner based on Python-Nmap
 
 
 ```
